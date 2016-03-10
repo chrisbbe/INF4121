@@ -3,13 +3,16 @@ package hangman;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Game {
+/**
+ * Game implements the game control.
+ */
+class Game {
     private static final String[] wordForGuessing = {"computer", "programmer", "software", "debugger", "compiler",
             "developer", "algorithm", "array", "method", "variable"};
 
-    private String guessWord;
-    private StringBuffer dashedWord;
-    private FileReadWriter fileReadWriter;
+    private final String guessWord;
+    private final StringBuffer dashedWord;
+    private final FileReadWriter fileReadWriter;
 
     public Game(boolean autoStart) {
         guessWord = getRandWord();
@@ -20,11 +23,20 @@ public class Game {
         }
     }
 
+    /**
+     * Picks randomly a word and returns the
+     * word.
+     *
+     * @return word choosed.
+     */
     private String getRandWord() {
         Random rand = new Random();
-        return wordForGuessing[rand.nextInt(9)];
+        return wordForGuessing[rand.nextInt(wordForGuessing.length)];
     }
 
+    /**
+     * Prints user menu.
+     */
     public void displayMenu() {
         System.out.println("Welcome to #Hangman# game. Please, try to guess my secret word.\n"
                 + "Use 'TOP' to view the top scoreboard, 'RESTART' to start a new game,"
@@ -32,6 +44,13 @@ public class Game {
         findLetterAndPrintIt();
     }
 
+    /**
+     * Prints the menu and takes in user-input,
+     * evaluates user inputs and allows the user
+     * to write their name for the scoreboard.
+     * <p>
+     * A new game is started when the word is guessed.
+     */
     private void findLetterAndPrintIt() {
         boolean isHelpUsed = false;
         String letter;
@@ -40,8 +59,9 @@ public class Game {
 
         while (!dashBuff.toString().equals(guessWord)) {
             System.out.println("The secret word is: " + printDashes(dashBuff));
-            System.out.println("DEBUG " + guessWord);
-
+            if (HangmanGame.DEBUG_MODE) {
+                System.out.println("DEBUG " + guessWord);
+            }
             System.out.println("Enter your guess(1 letter allowed): ");
             Scanner input = new Scanner(System.in);
             letter = input.next();
@@ -49,7 +69,6 @@ public class Game {
             if (letter.matches("[a-z]")) {
                 mistakes += testLetter(dashBuff, letter);
             }
-
             isHelpUsed = menu(letter, dashBuff);
         }
 
@@ -62,7 +81,7 @@ public class Game {
             String playerName = input.next();
 
             fileReadWriter.readFromFile();
-            fileReadWriter.myArr.add(new Players(playerName, mistakes));
+            fileReadWriter.myArr.add(new Player(playerName, mistakes));
             fileReadWriter.writeToFile();
             fileReadWriter.printAndSortScoreBoard();
         } else {
@@ -74,6 +93,13 @@ public class Game {
         new Game(true);
     }
 
+    /**
+     * Executes menu command entered by letter.
+     *
+     * @param letter   entered by user.
+     * @param dashBuff Word to guess.
+     * @return true if help is used, false otherwise.
+     */
     private boolean menu(String letter, StringBuffer dashBuff) {
         if (letter.equals(Command.restart.toString())) {
             new Game(true);
@@ -117,6 +143,12 @@ public class Game {
         return 0;
     }
 
+    /**
+     * Reveals one random char in the secret word to guess,
+     * and prints the word.
+     *
+     * @param dashBuff containing the word to guess.
+     */
     private void getAndPrintHelp(StringBuffer dashBuff) {
         int i = 0, j = 0;
         while (j < 1) {
@@ -129,6 +161,12 @@ public class Game {
         System.out.println("The secret word is: " + printDashes(dashBuff));
     }
 
+    /**
+     * Converts the word to dashed lines.
+     *
+     * @param word to censor.
+     * @return string where characters is dashed.
+     */
     private StringBuffer getDashedWord(String word) {
         StringBuffer dashes = new StringBuffer("");
         for (int i = 0; i < word.length(); i++) {
@@ -137,6 +175,14 @@ public class Game {
         return dashes;
     }
 
+    /**
+     * Prints the word, where guessed characters are shown,
+     * other characters are shown as dashes.
+     *
+     * @param word to guess.
+     * @return string where guessed char are shown, other
+     * chars as dashes.
+     */
     private String printDashes(StringBuffer word) {
         String toDashes = "";
         for (int i = 0; i < word.length(); i++) {

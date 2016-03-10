@@ -78,7 +78,8 @@ Session.vim
 .idea/dictionaries
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
-.iml
+*.iml
+.idea
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -191,3 +192,5 @@ $RECYCLE.BIN/
 # Mac
 .DS_Store
 
+# SourceMonitor
+.smproj

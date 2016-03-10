@@ -2,11 +2,20 @@ package hangman;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class FileReadWriter {
-    public static final String PERSISTENT_FILE = "players.ser";
-    public ArrayList<Players> myArr = new ArrayList<>();
+/**
+ * FileReadWriter implements methods to write and read
+ * the Hangman scoreboard from/to a file.
+ */
+class FileReadWriter {
+    private static final String PERSISTENT_FILE = "players.ser";
+    public ArrayList<Player> myArr = new ArrayList<>();
 
+    /**
+     * Writes the ArrayList containing the players as a byte
+     * stream to file PERSISTENT_FILE
+     */
     public void writeToFile() {
         try {
             ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(PERSISTENT_FILE));
@@ -17,6 +26,10 @@ public class FileReadWriter {
         }
     }
 
+    /**
+     * Reads the byte stream in PERSISTENT_FILE and restores
+     * the ArrayList containing players.
+     */
     public void readFromFile() {
         try {
             ObjectInputStream input = new ObjectInputStream(new FileInputStream(PERSISTENT_FILE));
@@ -29,23 +42,16 @@ public class FileReadWriter {
         }
     }
 
+    /**
+     * Sorts the scoreboard and prints the
+     * result in ascending order.
+     */
     public void printAndSortScoreBoard() {
-        Players temp;
-        int n = myArr.size();
-        for (int pass = 1; pass < n; pass++) {
-
-            for (int i = 0; i < n - pass; i++) {
-                if (myArr.get(i).getScores() > myArr.get(i + 1).getScores()) {
-                    temp = myArr.get(i);
-                    myArr.set(i, myArr.get(i + 1));
-                    myArr.set(i + 1, temp);
-                }
-            }
-        }
+        Collections.sort(myArr);
 
         System.out.println("Scoreboard:");
         int place = 1;
-        for (Players p : myArr) {
+        for (Player p : myArr) {
             System.out.printf("%d. %s ----> %d\n", place++, p.getName(), p.getScores());
         }
     }
