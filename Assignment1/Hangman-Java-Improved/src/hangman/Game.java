@@ -11,30 +11,30 @@ class Game {
             "developer", "algorithm", "array", "method", "variable"};
 
     private static final String[] hangedMan = {
-"___________.._______        ",
-"| .__________))______|      ",
-"| | / /      ||             ",  
-"| |/ /       ||             ",  
-"| | /        ||.-''.        ",
-"| |/         |/ _  Y        ", 
-"| |          || `/,|        ", 
-"| |          (`_.'          ", 
-"| |         .-`--'.         ",  
-"| |        /Y . . Y7        ",  
-"| |       // |   | z7       ",
-"| |      //  | . |  z7      ", 
-"| |     ')   |   |   (`     ", 
-"| |          ||'||          ", 
-"| |          || ||          ", 
-"| |          || ||          ", 
-"| |          || ||          ", 
-"| |         / | | Y         ", 
-"----------|_`-' `-' |---|   ", 
-"|-|-------Y Y       '-|-|   ", 
-"| |        Y Y        | |   ", 
-": :         Y Y       : :   ", 
-". .          `'       . .   ",
-"                            "};
+            "___________.._______        ",
+            "| .__________))______|      ",
+            "| | / /      ||             ",
+            "| |/ /       ||             ",
+            "| | /        ||.-''.        ",
+            "| |/         |/ _  Y        ",
+            "| |          || `/,|        ",
+            "| |          (`_.'          ",
+            "| |         .-`--'.         ",
+            "| |        /Y . . Y7        ",
+            "| |       // |   | z7       ",
+            "| |      //  | . |  z7      ",
+            "| |     ')   |   |   (`     ",
+            "| |          ||'||          ",
+            "| |          || ||          ",
+            "| |          || ||          ",
+            "| |          || ||          ",
+            "| |         / | | Y         ",
+            "----------|_`-' `-' |---|   ",
+            "|-|-------Y Y       '-|-|   ",
+            "| |        Y Y        | |   ",
+            ": :         Y Y       : :   ",
+            ". .          `'       . .   ",
+            "                            "};
 
     private final String guessWord;
     private final StringBuffer dashedWord;
@@ -72,7 +72,7 @@ class Game {
 
     private void printMan(int mistakes) {
         int i = 0;
-        while(i < mistakes*3) {
+        while (i < mistakes * 3) {
             System.out.println(hangedMan[i]);
             i++;
         }
@@ -80,7 +80,7 @@ class Game {
 
     private void printFullMan(int mistakes) {
         int i = 0;
-        while(i < mistakes*4) {
+        while (i < mistakes * 4) {
             System.out.println(hangedMan[i]);
             i++;
         }
@@ -98,7 +98,7 @@ class Game {
         String letter;
         StringBuffer dashBuff = new StringBuffer(dashedWord);
         int mistakes = 0;
-        int maxMistakes= 6;
+        int maxMistakes = 6;
 
         while ((!dashBuff.toString().equals(guessWord)) && (mistakes < maxMistakes)) {
             System.out.println("The secret word is: " + printDashes(dashBuff));
@@ -113,12 +113,18 @@ class Game {
             if (letter.matches("[a-z]")) {
                 mistakes += testLetter(dashBuff, letter);
             }
-            
             if (!isHelpUsed) {
-                 isHelpUsed = menu(letter, dashBuff);
+                isHelpUsed = menu(letter, dashBuff);
             }
         }
 
+        printResult(isHelpUsed, mistakes, maxMistakes, dashBuff);
+
+        // restart the game
+        new Game(true);
+    }
+
+    private void printResult(boolean isHelpUsed, int mistakes, int maxMistakes, StringBuffer dashBuff) {
         if ((!isHelpUsed) && (mistakes < maxMistakes)) {
             System.out.println("You won with " + mistakes + " mistake(s).");
             System.out.println("The secret word is: " + printDashes(dashBuff));
@@ -131,7 +137,7 @@ class Game {
             fileReadWriter.myArr.add(new Player(playerName, mistakes));
             fileReadWriter.writeToFile();
             fileReadWriter.printAndSortScoreBoard();
-        } else if (mistakes < maxMistakes){
+        } else if (mistakes < maxMistakes) {
             System.out.println("You won with " + mistakes + " mistake(s). but you have cheated. You are not allowed to enter into the scoreboard.");
             System.out.println("The secret word is: " + printDashes(dashBuff));
         } else {
@@ -139,9 +145,6 @@ class Game {
             System.out.println("You lost! The man is on the gallow...");
             System.out.println("The secret word was: " + guessWord);
         }
-
-        // restart the game
-        new Game(true);
     }
 
     /**
@@ -162,10 +165,8 @@ class Game {
             System.exit(1);
         } else if (letter.equals(Command.help.toString())) {
             getAndPrintHelp(dashBuff);
-            
             return true; // cheated
         }
-            
         return false; // not cheated
     }
 
