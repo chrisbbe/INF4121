@@ -10,6 +10,32 @@ class Game {
     private static final String[] wordForGuessing = {"computer", "programmer", "software", "debugger", "compiler",
             "developer", "algorithm", "array", "method", "variable"};
 
+    private static final String[] hangedMan = {
+"___________.._______        ",
+"| .__________))______|      ",
+"| | / /      ||             ",  
+"| |/ /       ||             ",  
+"| | /        ||.-''.        ",
+"| |/         |/ _  Y        ", 
+"| |          || `/,|        ", 
+"| |          (`_.'          ", 
+"| |         .-`--'.         ",  
+"| |        /Y . . Y7        ",  
+"| |       // |   | z7       ",
+"| |      //  | . |  z7      ", 
+"| |     ')   |   |   (`     ", 
+"| |          ||'||          ", 
+"| |          || ||          ", 
+"| |          || ||          ", 
+"| |          || ||          ", 
+"| |         / | | Y         ", 
+"----------|_`-' `-' |---|   ", 
+"|-|-------Y Y       '-|-|   ", 
+"| |        Y Y        | |   ", 
+": :         Y Y       : :   ", 
+". .          `'       . .   ",
+"                            "};
+
     private final String guessWord;
     private final StringBuffer dashedWord;
     private final FileReadWriter fileReadWriter;
@@ -44,6 +70,22 @@ class Game {
         findLetterAndPrintIt();
     }
 
+    private void printMan(int mistakes) {
+        int i = 0;
+        while(i < mistakes*3) {
+            System.out.println(hangedMan[i]);
+            i++;
+        }
+    }
+
+    private void printFullMan(int mistakes) {
+        int i = 0;
+        while(i < mistakes*4) {
+            System.out.println(hangedMan[i]);
+            i++;
+        }
+    }
+
     /**
      * Prints the menu and takes in user-input,
      * evaluates user inputs and allows the user
@@ -56,12 +98,14 @@ class Game {
         String letter;
         StringBuffer dashBuff = new StringBuffer(dashedWord);
         int mistakes = 0;
+        int maxMistakes= 6;
 
-        while (!dashBuff.toString().equals(guessWord)) {
+        while ((!dashBuff.toString().equals(guessWord)) && (mistakes < maxMistakes)) {
             System.out.println("The secret word is: " + printDashes(dashBuff));
             if (HangmanGame.DEBUG_MODE) {
                 System.out.println("DEBUG " + guessWord);
             }
+            printMan(mistakes);
             System.out.println("Enter your guess(1 letter allowed): ");
             Scanner input = new Scanner(System.in);
             letter = input.next();
@@ -69,10 +113,13 @@ class Game {
             if (letter.matches("[a-z]")) {
                 mistakes += testLetter(dashBuff, letter);
             }
-            isHelpUsed = menu(letter, dashBuff);
+            
+            if (!isHelpUsed) {
+                 isHelpUsed = menu(letter, dashBuff);
+            }
         }
 
-        if (!isHelpUsed) {
+        if ((!isHelpUsed) && (mistakes < maxMistakes)) {
             System.out.println("You won with " + mistakes + " mistake(s).");
             System.out.println("The secret word is: " + printDashes(dashBuff));
 
@@ -84,9 +131,13 @@ class Game {
             fileReadWriter.myArr.add(new Player(playerName, mistakes));
             fileReadWriter.writeToFile();
             fileReadWriter.printAndSortScoreBoard();
-        } else {
+        } else if (mistakes < maxMistakes){
             System.out.println("You won with " + mistakes + " mistake(s). but you have cheated. You are not allowed to enter into the scoreboard.");
             System.out.println("The secret word is: " + printDashes(dashBuff));
+        } else {
+            printFullMan(mistakes);
+            System.out.println("You lost! The man is on the gallow...");
+            System.out.println("The secret word was: " + guessWord);
         }
 
         // restart the game
@@ -111,9 +162,11 @@ class Game {
             System.exit(1);
         } else if (letter.equals(Command.help.toString())) {
             getAndPrintHelp(dashBuff);
-            return true;
+            
+            return true; // cheated
         }
-        return false;
+            
+        return false; // not cheated
     }
 
     /**
