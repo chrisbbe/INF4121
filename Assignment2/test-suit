@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="../newshit/uc1-tc1-register-new-account">uc1-tc1-register-new-account</a></td></tr>
+<tr><td><a href="../newshit/uc1-tc2-logging-in">uc1-tc2-logging-in</a></td></tr>
+<tr><td><a href="../newshit/uc1-tc3-resetting-password">uc1-tc3-resetting-password</a></td></tr>
+<tr><td><a href="../newshit/uc2-tc4-selecting-products-1">uc2-tc4-selecting-products-1</a></td></tr>
+<tr><td><a href="../newshit/uc2-tc4-selecting-products-2">uc2-tc4-selecting-products-2</a></td></tr>
+<tr><td><a href="../newshit/uc3-tc6-checkout-1">uc3-tc6-checkout-1</a></td></tr>
+<tr><td><a href="../newshit/uc3-tc7-checkout-2">uc3-tc7-checkout-2</a></td></tr>
+<tr><td><a href="../newshit/uc4-tc8-cart-changes">uc4-tc8-cart-changes</a></td></tr>
+<tr><td><a href="../newshit/uc5-tc9-finalizing-order">uc5-tc9-finalizing-order</a></td></tr>
+<tr><td><a href="../newshit/uc6-tc10-logging-out">uc6-tc10-logging-out</a></td></tr>
+</tbody></table>
+</body>
+</html>

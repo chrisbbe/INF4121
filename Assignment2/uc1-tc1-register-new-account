@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://demo.avactis.com/" />
+<link rel="selenium.base" href="http://demo.avactis.com/4.7.9/" />
 <title>Register new account</title>
 </head>
 <body>
@@ -13,7 +13,17 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/4.7.9/</td>
+	<td>https://temp-mail.org/en/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>id=mail</td>
+	<td>email</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>http://demo.avactis.com/4.7.9/</td>
 	<td></td>
 </tr>
 <tr>
@@ -29,7 +39,7 @@
 <tr>
 	<td>type</td>
 	<td>name=customer_info[Customer][Email]</td>
-	<td>email@email.email</td>
+	<td>${email}</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -56,7 +66,11 @@
 	<td>//input[@value='Register']</td>
 	<td></td>
 </tr>
-
+<tr>
+	<td>open</td>
+	<td>http://demo.avactis.com/4.7.9/sign-in.php?asc_action=customer_sign_out</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>

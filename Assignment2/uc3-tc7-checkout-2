@@ -3,40 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://demo.avactis.com/" />
-<title>Loging in</title>
+<link rel="selenium.base" href="http://demo.avactis.com/4.7.9/" />
+<title>Test Case 3 - Shopping Cart - Alternative 2</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Loging in</td></tr>
+<tr><td rowspan="1" colspan="3">Test Case 3 - Shopping Cart - Alternative 2</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/4.7.9/</td>
+	<td>/4.7.9/checkout.php</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sign In</td>
+	<td>css=a.btn.btn-primary</td>
 	<td></td>
 </tr>
-<tr>
-	<td>type</td>
-	<td>id=account_sign_in_form_email_id</td>
-	<td>email@email.email</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=account_sign_in_form_passwd_id</td>
-	<td>123</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Sign In']</td>
-	<td></td>
-</tr>
-
 </tbody></table>
 </body>
 </html>
