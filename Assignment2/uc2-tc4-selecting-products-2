@@ -52,11 +52,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>xpath=(//input[@value='Add To Cart'])[4]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=View Cart</td>
 	<td></td>

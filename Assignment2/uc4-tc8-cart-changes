@@ -38,8 +38,8 @@
 </tr>
 <tr>
 	<td>selectAndWait</td>
-	<td>name=quantity_in_cart[1]</td>
-	<td>label=15</td>
+	<td>name=quantity_in_cart[2]</td>
+	<td>label=10</td>
 </tr>
 </tbody></table>
 </body>
